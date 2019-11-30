@@ -19,6 +19,9 @@
 
     ![alt text](example/images/push_entitle.jpg  "push notifications capability")
 
+##### Pre Unity Editor v2018.3
+If you are on a newer Unity version than 2018.3 this step is done automatically during the post build process. 
+
 - Add a run script to your build phases, In Xcode, go to your Targets, under your app’s name, select Build Phases after   embed frameworks, add a run script phase and set it to use `/bin/sh` and the [script found here](https://github.com/CleverTap/clevertap-unity-sdk/blob/master/Plugin/CleverTapUnity/iOS/strip.sh):
 
   ![alt text](example/images/ct_script_ios.jpg  "run script")
