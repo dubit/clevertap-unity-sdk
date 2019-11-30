@@ -72,9 +72,16 @@ public static class CleverTapPostBuildProcessor
 			proj.AddFrameworkToProject(projectTarget, "CoreLocation.framework", false);
 			proj.AddFrameworkToProject(projectTarget, "Security.framework", false);
 
-            // Add linker flags
-            proj.AddBuildProperty(projectTarget, "OTHER_LDFLAGS", "-ObjC");
+			// Add linker flags
+			proj.AddBuildProperty(projectTarget, "OTHER_LDFLAGS", "-ObjC");
 
+#if UNITY_2018_3_OR_NEWER
+			using (var streamReader = new StreamReader(@"Assets/CleverTapUnity/iOS/strip.sh", Encoding.UTF8))
+			{
+				proj.AddShellScriptBuildPhase(projectTarget, "Build Frameworks", "/bin/sh", streamReader.ReadToEnd());
+			}
+#endif
+			
 			File.WriteAllText(projPath, proj.WriteToString());
 
 			// Update plist
